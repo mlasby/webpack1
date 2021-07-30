@@ -1,3 +1,4 @@
-import { helloWorld } from './hello-world.js';
+import { helloWorld } from '../lib/hello-world.js';
+import '../styles/main.css';
 
 helloWorld();

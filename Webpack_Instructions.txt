@@ -53,17 +53,56 @@ module.exports = {
 devServer: {
    contentBase: path.join(__dirname, 'dist')
  }
-}
+};
 
 // Add the Webpack development server and Webpack to package.json in the script section:
   "scripts": {
 +   "build": "webpack",
-+   "dev-server": "webpack-dev-server",
++   "dev-server": "webpack serve r",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
 
 // Start the Webpack development server
 npm run dev-server
+// Once the Webpack development server is up and running, 
+// visit the localhost in a browser (ex. http://localhost:8080/) 
+// and you should see your JavaScript test alert. By using the 
+// dev-server you can make changes, save, and it will re-bundle 
+// automatically. You won’t have to worry about manually building 
+// and opening your index.html in the browser each time you make a change.
 
 // Bundle the code for distribution
 npm run build
+
+// Adding Style Loaders
+// If you want to be able to import css files you will need to 
+// add the appropriate loaders to your webpack.config.js
+// css-loader is used to interpret and resolve imports and 
+// style-loader is used to inject your css into the DOM.
+
+// Install the 2 loaders to your dev dependencies
+npm install --save-dev css-loader style-loader
+
+// add the module rules to use the loaders to your webpack.config file.
+ "module": {
+   "rules": [
+     {
+       "test": /\.css$/,
+       "use": [
+         "style-loader",
+         "css-loader"
+       ]
+     },
+   ]
+ }
+
+
+// Create a folder called ‘styles’ in the 'src' folder 
+// and add a css file called 'main.css' in the 'styles' folder.
+// Add some test code to the css file:
+body {
+ background: green;
+}
+
+// Connect your styles to your index.js file:
+import './styles/main.css';
